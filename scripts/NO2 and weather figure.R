@@ -79,7 +79,7 @@ noaa.no2[, c("NO2_trop_mean") := .(NO2_trop_mean * 1000000)]
     geom_vline(xintercept = 0, linetype = "dashed") +
     #geom_text(aes(x = dif_temp_feb * 1.05, y = dif_no2_feb * 1.05), show.legend = FALSE) +
     geom_path(lwd = 2, arrow = arrow(type = "open", angle = 30, length = unit(0.1, "inches")), alpha = 0.8) +
-    labs(x = "Temperature difference to February (C°)", y = expression(paste("April-February difference of monthly ", NO[2], " concentration average (", mu, "mol.", cm^-2, ")", sep = "")), color = "Year") +
+    labs(x = "Temperature difference to February (C°)", y = expression(paste("April-February difference of monthly ", NO[2], " concentration average (", mu, "mol.", m^-2, ")", sep = "")), color = "Year") +
     scale_alpha(guide = 'none') +
     scale_color_viridis(discrete=TRUE) +
     facet_wrap(region~., ncol = 1) +
