@@ -89,7 +89,7 @@ region.poblacion <- data.table(region, poblacion)
          salto_mean_no2 = if_else(base == "no2", salto_mean_no2_porcentual/poblacion, salto_mean_no2)) %>%
   dcast(region ~ base, value.var = "salto_mean_no2") %>%
   ggplot(aes(x = no2, y = google))+#, col = region)) +
-  geom_point(size = 10) +
+  geom_point(size = 8) +
   #ggtitle("Diferencias abril-febrero") +
   labs(x = bquote(April-February~NO[2]~concentration~percentage~difference~.("(% per million inhabitants)")),
        y = "April-February residential variation percentage difference (%)",
@@ -97,9 +97,9 @@ region.poblacion <- data.table(region, poblacion)
     theme_bw() +
    # scale_color_viridis(discrete = TRUE) +
     theme(legend.position = "top") +
-  geom_text(aes(label = region), vjust = 2.5))
+  geom_text(aes(label = region), vjust = 2.5, size = 3))
 
-ggsave("figures and tables/scatter.png", scatter.saltos.poblacion, width = 10, height = 7.5)
+ggsave("figures and tables/scatter.png", scatter.saltos.poblacion, width = 8, height = 6)
 
 
 df.cor.pob <- marzo.abril.salto %>%
