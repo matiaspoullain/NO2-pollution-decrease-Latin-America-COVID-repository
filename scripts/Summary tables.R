@@ -79,3 +79,39 @@ library(xtable)
 print(xtable(tabla.no2, type = "latex"), file = "figures and tables/NO2 summary table.tex", include.rownames=FALSE)
 print(xtable(tabla.movi, type = "latex"), file = "figures and tables/Mobility summary table.tex", include.rownames=FALSE)
 
+
+#OMI:
+no2.ciudades <- lectura.no2.ciudades(satelite = "OMI", mensual = FALSE)
+
+no2.ciudades <- no2.ciudades[between(as.Date(Fecha_datetime), as.IDate("2020-02-01"), as.IDate("2020-12-31")),]
+
+no2.ciudades[, mes := month(Fecha_datetime, label = TRUE, abbr = TRUE)]
+
+no2.ciudades <- no2.ciudades[, .(NO2_trop_mean = mean(no2_mean, na.rm = TRUE), SEM = sd(no2_mean, na.rm = TRUE) / sqrt(.N)), by = .(ciudad, mes) ]
+
+no2.ciudades[, c("NO2_trop_mean", "SEM") := .(1000000 * NO2_trop_mean, 1000000 * SEM)]
+
+no2.ciudades[, c("NO2_trop_mean", "SEM") := .(format(round(NO2_trop_mean, 2), nsmall = 2),
+                                       format(round(SEM, 2), nsmall = 2))]
+
+no2.ciudades <- no2.ciudades %>%
+  mutate(ciudad = case_when(ciudad == "Bogota" ~ "Bogotá",
+                            ciudad == "Lima Province" ~ "Lima",
+                            ciudad == "Mexico City" ~ "México DF",
+                            TRUE ~ ciudad))
+
+no2.ciudades[, label_no2 := paste0(NO2_trop_mean, " (", trimws(SEM), ")")]
+
+no2.ciudades <- no2.ciudades[, .(ciudad, mes, label_no2)]
+
+formateado <- no2.ciudades %>%
+  melt(id = c("ciudad", "mes")) %>%
+  dcast(mes + variable ~ ciudad, value.var = "value") %>%
+  arrange(variable, mes)
+
+names(formateado)[1:2] <- c("Month", "Variable")
+
+formateado$Variable <- NULL
+
+library(xtable)
+print(xtable(formateado, type = "latex"), file = "figures and tables/NO2 summary table OMI.tex", include.rownames=FALSE)
