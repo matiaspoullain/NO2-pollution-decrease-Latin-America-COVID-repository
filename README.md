@@ -1,6 +1,6 @@
-# NO2-pollution-decrease-South-America-COVID-repository
+# NO2-pollution-decrease-Latin-America-COVID-repository
 
-This repository contains all the code used to download, manipulate, visualize and analyze the data used in _NO2 pollution decrease in big cities of South America during COVID-19 pandemic_ (Matias Poullain, Juan Martin Guerrieri, Manuel Eduardo Miller, María Eugenia Utgés, María Soledad Santini, Mariana Manteca Acosta, Agustín Fernández, and Franco Leonel Marsico, 2021).
+This repository contains all the code used to download, manipulate, visualize and analyze the data used in _NO2 pollution decrease in big cities of Latin America during COVID-19 pandemic_ (Matias Poullain, Juan Martin Guerrieri, Manuel Eduardo Miller, María Eugenia Utgés, María Soledad Santini, Mariana Manteca Acosta, Agustín Fernández, and Franco Leonel Marsico, 2022).
 
 * Maintainer: Matias Poullain
 * Developers: Matias Poullain, Juan Martín Guerrieri
